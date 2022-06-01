@@ -1,0 +1,28 @@
+<div class="">
+    <%= link_to 'Add billings', new_card_billing_path %><br>
+</div>
+
+</div>
+
+<table>
+<tr>
+        <td>Name</td>
+    </tr>
+
+<% @card.billings.each do |billing| %>
+    <tr>
+        <td><%= billing.name %></td>
+        <td><%#= billing.card_number %></td>
+        <td><%#= billing.cvv %></td>
+        <td><%#= billing.postal_code %></td>
+        <td><%#= billing.valid_from %></td>
+        <td><%#= billing.valid_thru %></td>
+        <td><%#= billing.total_amount %></td>
+        <td><%#= billing.amount_paid %></td>
+        <td><%#= billing.due_amount %></td>
+        <td><%= link_to 'show', card_billing_path(@card, billing) %></td>
+        <td><td><%= link_to 'edit', edit_card_billing_path(@card, billing) %></td></td>   
+        <td><%#= link_to 'delete', billings_path(@card, billing), method: :delete %></td>
+    </tr>
+<% end %>
+</table>

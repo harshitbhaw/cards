@@ -1,0 +1,26 @@
+<%= form_with scope: @card, url: cards_path, local: true do |form| %>
+
+    <p>
+        <%= form.label :CardHolderName %>
+        <%= form.text_field :name %>
+    </p>
+    <p>
+        <%= form.label :CardNumber %>
+        <%= form.text_field :card_number %>
+    </p>
+    <p>
+        <%= form.label :CVC %>
+        <%= form.text_field :cvc %>
+    </p>
+    <p>
+        <%= form.label :StartDate %>
+        <%= form.date_field :valid_from %>
+    </p>
+    <p>
+        <%= form.label :EndDate %>
+        <%= form.date_field :valid_thru %>
+    </p>
+
+    <%= form.select :card_type, ['debit', 'credit']%>
+    <p><%= form.submit %></p>
+<% end %>

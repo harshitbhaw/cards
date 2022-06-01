@@ -1,0 +1,2 @@
+class Dedit < ApplicationRecord
+end

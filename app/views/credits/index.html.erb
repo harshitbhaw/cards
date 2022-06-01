@@ -1,0 +1,9 @@
+<% @credits.each do |credit| %>
+    <tr>
+        <td><%= credit.name %></td>
+        <td><%= credit.card_number %></td>
+        <td><%= credit.cvv %></td>
+        <td><%= credit.start_Date %></td>
+        <td><%= credit.end_date %></td>
+    </tr>
+<% end %>

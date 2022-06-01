@@ -1,0 +1,25 @@
+
+    <p><%= @card.name %></p>
+    <p><%= @card.card_number.to_s.gsub(/\d(?=[0-9]{4})/, '*') %></p>
+    <div>
+        <span class ="data1">
+            <%= @card.cvv.to_s.gsub(/\d(?=[0-9]{0})/, '*') %></span>
+            <span class="data1" style="display: none" ><%= @card.cvv %></span>
+        <button id="show">Show</button>
+    </div>
+    <p><%= @card.valid_from %></p>
+    <p><%= @card.valid_thru %></p>
+    <p><%= @card.card_type %></p>
+    <%= link_to 'billings', card_billings_path(@card) %>
+    <%= link_to 'Edit', edit_card_path(@card) %>
+    <%= link_to 'Back', cards_path %>
+    
+
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $(".data1").toggle();
+  });
+});
+</script>

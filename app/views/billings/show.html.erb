@@ -1,0 +1,26 @@
+<p><%= @billing.name %></p>
+<p><%= @billing.card_number.to_s.gsub(/\d(?=[0-9]{4})/, '*') %></p>
+    <div>
+        <span class ="data">
+            <%= @billing.cvv.to_s.gsub(/\d(?=[0-9]{0})/, '*') %></span>
+            <span class="data" style="display: none" ><%= @billing.cvv %></span>
+        <button id="show">Show</button>
+    </div>
+<p><%= @billing.postal_code %></p>
+<p><%= @billing.valid_from %></p>
+<p><%= @billing.valid_thru %></p>
+<p><%= @billing.total_amount %></p>
+<p><%= @billing.amount_paid %></p>
+<p><%= @billing.due_amount %></p>
+
+<%= link_to "Destroy Billing", [@billing.card, @billing], data: {
+                method: :delete
+              } %>
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $(".data").toggle();
+  });
+});
+</script>

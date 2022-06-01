@@ -1,0 +1,39 @@
+<h2>card details page</h2>
+
+<%= link_to "Exort csv", cards_path(format: :csv), class: 'btn-btn-primary' %>
+<%= form_tag import_cards_path, multipart: true, class: 'form-inline' do %>
+  
+    <div class="form-group">
+        <%= file_field_tag :file, class: '' %>
+    </div>
+    <div class="form-group">
+        <%= submit_tag "Import CSV", class: 'btn-btn-info' %>
+    </div>
+<% end %>
+<div class="">
+    <%= link_to 'Add cards', new_card_path(@card) %><br>
+</div>
+
+
+<table>
+<tr>
+    <td>CardHolderName</td>
+    <td>Card Type</td>
+</tr>
+
+<% @cards.each do |card| %>
+    <tr>
+
+        <td><%= card.name %></td>
+        <td><%= card.card_number %></td>
+        <td><%= card.cvv %></td>
+        <td><%= card.valid_from %></td>
+        <td><%= card.valid_thru %></td>
+        <td><%= card.card_type %></td>
+        <td><%#= link_to 'show', card_path(card) %></td>
+        <td><%#= link_to "Exort csv", cards_path(format: :csv), class: 'btn-btn-primary' %></td>
+        <td><%= link_to 'delete', card_path(card), method: :delete %></td>
+    </tr>
+<% end %>
+</table>
+
