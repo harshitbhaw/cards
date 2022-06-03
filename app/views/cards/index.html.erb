@@ -15,25 +15,40 @@
 </div>
 
 
-<table>
-<tr>
-    <td>CardHolderName</td>
-    <td>Card Type</td>
-</tr>
+<table id="cards-datatable" data-source="<%= cards_path(card_type: params[:card_type], format: :json) %>">
+    <thead>
+        <tr>
+        <td>CardHolderName</td>
+        <td>Card Type</td>
+        <td>CardNumber</td>
+        <td>CVV</td>
+        <td>Validfrom</td>
+        <td>Validthru</td>
+    </thead>
+<tbody>
 
-<% @cards.each do |card| %>
-    <tr>
-
-        <td><%= card.name %></td>
-        <td><%= card.card_number %></td>
-        <td><%= card.cvv %></td>
-        <td><%= card.valid_from %></td>
-        <td><%= card.valid_thru %></td>
-        <td><%= card.card_type %></td>
-        <td><%#= link_to 'show', card_path(card) %></td>
-        <td><%#= link_to "Exort csv", cards_path(format: :csv), class: 'btn-btn-primary' %></td>
-        <td><%= link_to 'delete', card_path(card), method: :delete %></td>
-    </tr>
-<% end %>
+</tbody>
 </table>
 
+
+<script>
+$(document).ready(function() {
+    $('#cards-datatable').dataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        "url": $('#cards-datatable').data('source')
+      },
+      "pagingType": "full_numbers",
+      "columns": [
+        {"data": "name"},
+        {"data": "card_number"},
+        {"data": "cvv"},
+        {"data": "card_type"},
+        {"data": "valid_from"},
+        {"data": "valid_thru"}
+      ]
+
+    });
+  });
+</script>

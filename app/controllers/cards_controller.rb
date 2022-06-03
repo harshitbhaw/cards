@@ -5,6 +5,7 @@ class CardsController < ApplicationController
         respond_to do |format|
             format.html
             format.csv { send_data @cards.to_csv }
+            format.json { render json: CardDatatable.new(params, view_context: view_context) }
         end
     end
 
