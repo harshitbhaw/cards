@@ -1,8 +1,16 @@
 class CardDatatable < AjaxDatatablesRails::ActiveRecord
+  # delegate :edit_card_path, to: :@view
+  # extend Forwardable
+  delegate :params, to: :@view
+  delegate :link_to, :edit_card_path, to: :@view
+
+
+  def initialize(params, opts = {})
+    @view = opts[:view_context]
+    super
+  end
 
   def view_columns
-    # Declare strings in this format: ModelName.column_name
-    # or in aliased_join_table.column_name format
     @view_columns ||= {
       # id:         { source: "User.id" },
     name:         { source: "Card.name" },
@@ -17,34 +25,21 @@ class CardDatatable < AjaxDatatablesRails::ActiveRecord
   def data
     records.map do |record|
       {
-        name:         record.name,
+        name:         link_to(record.name, record),
+        # name:         link_to(record.name, edit_card_path(record)),
         card_number:  record.card_number,
         cvv:          record.cvv,
         card_type:    record.card_type,
         valid_from:   record.valid_from,
         valid_thru:   record.valid_thru,
+
       }
     end
   end
 
   def get_raw_records
     # insert query here
-    # User.alls
     # Card.all
-    # if (card_type == "credit")
-    #   Card.credit.all
-    # else
-    #   Card.debit.all
-    # end
     @cards = Card.where(card_type: params[:card_type])
-    # if params['credit'].present?
-      # cards = cards.where(pstats[:card_type].gteq(params['credit']))
-    #  @cards = Card.where(card_type: params[:card_type])
-    # end
-    # if params['debit'].present?
-      # cards = cards.where(pstats[:card_type].lteq(params['debit']))
-    #  @cards = Card.where(card_type: params[:card_type])
-    # end
   end
-
 end

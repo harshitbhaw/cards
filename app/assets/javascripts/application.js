@@ -17,7 +17,8 @@
 //= require_tree
 //= require rails-ujs
 //= require activestorage
-
+//= require chartkick
+//= require Chart.bundle
 
 // $(document).on('turbolinks:load',function(){
 //    $("table[role:'datatable']").each(function(){

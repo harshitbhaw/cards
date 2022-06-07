@@ -1,0 +1,2 @@
+class CardDatatable < ApplicationDatatable
+end
