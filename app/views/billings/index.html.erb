@@ -4,25 +4,44 @@
 
 </div>
 
-<table>
-<tr>
-        <td>Name</td>
-    </tr>
+<table  id="billings-datatable" data-source="<%= card_billings_path(format: :json) %>" >
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>CardNumber</td>
+            <td>CVV</td>
+            <td>PostalCode</td>
+            <td>Validfrom</td>
+            <td>Validthru</td>
+            <td>TotalAmount</td>
+            <td>AmountPaid</td>
+            <td>AmountDue</td>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
 
-<% @card.billings.each do |billing| %>
-    <tr>
-        <td><%= billing.name %></td>
-        <td><%#= billing.card_number %></td>
-        <td><%#= billing.cvv %></td>
-        <td><%#= billing.postal_code %></td>
-        <td><%#= billing.valid_from %></td>
-        <td><%#= billing.valid_thru %></td>
-        <td><%#= billing.total_amount %></td>
-        <td><%#= billing.amount_paid %></td>
-        <td><%#= billing.due_amount %></td>
-        <td><%= link_to 'show', card_billing_path(@card, billing) %></td>
-        <td><td><%= link_to 'edit', edit_card_billing_path(@card, billing) %></td></td>   
-        <td><%#= link_to 'delete', billings_path(@card, billing), method: :delete %></td>
-    </tr>
-<% end %>
 </table>
+<script>
+$(document).ready(function() {
+    $('#billings-datatable').dataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        "url": $('#billings-datatable').data('source')
+      },
+      "pagingType": "full_numbers",
+      "columns": [
+        {"data": "name"},
+        {"data": "card_number"},
+        {"data": "cvv"},
+        {"data": "postal_code"},
+        {"data": "valid_from"},
+        {"data": "valid_thru"},
+        {"data": "total_amount"},
+        {"data": "amount_paid"},
+        {"data": "due_amount"},
+      ]
+    });
+  });
+</script>

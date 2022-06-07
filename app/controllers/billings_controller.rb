@@ -1,8 +1,11 @@
 class BillingsController < ApplicationController
     
-    def index
-        @card = Card.find(params[:card_id])
-        @billings = @card.billings.all
+    def index 
+
+        respond_to do |format|
+            format.html
+            format.json { render json: BillingDatatable.new(params, view_context: view_context) }
+        end
     end
 
     def new

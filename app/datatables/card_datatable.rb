@@ -32,7 +32,6 @@ class CardDatatable < AjaxDatatablesRails::ActiveRecord
         card_type:    record.card_type,
         valid_from:   record.valid_from,
         valid_thru:   record.valid_thru,
-
       }
     end
   end
