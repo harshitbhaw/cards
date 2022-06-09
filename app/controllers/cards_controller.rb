@@ -28,8 +28,7 @@ class CardsController < ApplicationController
         @card = Card.new(card_params)
         # @card.save 
             if @card.save
-                CardMailer.new_card_email(@card.user).deliver_now2
-        
+                CardWorkerJob.perform_later(@card.user)
                 flash[:success] = "Thank you for your card! We'll get contact you soon!"
                 redirect_to cards_path
             else
