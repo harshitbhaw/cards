@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+    before_action :card_params, only: [:show, :create, :update, :destroy] 
     def index
         @cards = current_user.cards.where(card_type: params[:card_type])
         # @cards = Card.all
@@ -10,10 +11,9 @@ class CardsController < ApplicationController
     end
 
     def import
-        
         current_user.cards.import(params[:file])
-        # Card.open(params[:file])
         redirect_to cards_path, notice: "Cards imported."
+        # Card.open(params[:file])
     end
 
     def new
@@ -26,8 +26,18 @@ class CardsController < ApplicationController
 
     def create
         @card = Card.new(card_params)
-        @card.save 
-        redirect_to cards_path
+        # @card.save 
+            if @card.save
+                CardMailer.new_card_email(@card.user).deliver_now2
+        
+                flash[:success] = "Thank you for your card! We'll get contact you soon!"
+                redirect_to cards_path
+            else
+                flash.now[:error] = "Your card form had some errors. Please check the form and resubmit."
+                render :new
+            end
+
+        # redirect_to cards_path
     end
 
     def edit

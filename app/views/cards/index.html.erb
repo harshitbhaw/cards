@@ -30,7 +30,7 @@
 <div class="row">
   <div class="col d-inline-flex justify-content-center">
     <div class="">
-      <%= pie_chart Card.group(:card_type).count %>
+      <%= pie_chart Card.group(:card_type).count, donut: true %>
     </div>
     <div class="">
       <div class="">
@@ -44,7 +44,7 @@
       </div>
     </div>
   </div>
-  
+
 </div>
 <script>
 $(document).ready(function() {

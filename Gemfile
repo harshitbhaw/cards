@@ -70,3 +70,6 @@ gem 'wicked_pdf'
 gem 'avatar', '~> 0.2.0'
 gem "chartkick"
 gem "groupdate"
+gem 'mailcatcher'
+gem 'sidekiq'
+gem "letter_opener", group: :development
