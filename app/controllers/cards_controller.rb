@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-    before_action :card_params, only: [:show, :create, :update, :destroy] 
+    # before_action :card_params, only: [:show, :create, :update, :destroy] 
     def index
         @cards = current_user.cards.where(card_type: params[:card_type])
         # @cards = Card.all
@@ -28,7 +28,8 @@ class CardsController < ApplicationController
         @card = Card.new(card_params)
         # @card.save 
             if @card.save
-                CardWorkerJob.perform_later(@card.user)
+            byebug
+                CardWorkerJob.perform_later(@card.user_id)
                 flash[:success] = "Thank you for your card! We'll get contact you soon!"
                 redirect_to cards_path
             else

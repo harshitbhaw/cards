@@ -1,0 +1,5 @@
+my_first_job:
+  cron: "*/30 * * * * *"
+  class: "CardWorkerJob"
+  queue: default
+  argument: user

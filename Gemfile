@@ -71,5 +71,7 @@ gem 'avatar', '~> 0.2.0'
 gem "chartkick"
 gem "groupdate"
 gem 'mailcatcher'
-gem 'sidekiq'
+# gem 'sidekiq'
+gem 'sidekiq', '~> 6.5'
 gem "letter_opener", group: :development
+gem 'sidekiq-cron'
